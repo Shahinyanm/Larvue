@@ -24,6 +24,7 @@ class CreateQuestionsTable extends Migration
             $table->unsignedInteger('best_answer_id')->nullable();
             $table->integer('user_id')->unsigned();
             $table->foreign('user_id')->references('id')->on('users');
+            $table->timestamp('created_at');
         });
     }
 
