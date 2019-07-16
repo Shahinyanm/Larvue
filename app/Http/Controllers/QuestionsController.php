@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\QuestionRequest;
 use App\Question;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -38,12 +39,15 @@ class QuestionsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(QuestionRequest $request)
     {
-        $question = new Question();
-        $question->title = $request->title;
-        $question->body = $request->body;
-        $question->save();
+//        $question = new Question();
+//        $question->user_id = \Auth::id();
+//        $question->title = $request->title;
+//        $question->body = $request->body;
+//        $question->save();
+        $request->user()->questions()->create($request->only('title','body'));
+        return redirect()->route('questions.index')->with('success','Question Created');
     }
 
     /**
