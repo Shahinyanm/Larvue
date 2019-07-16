@@ -58,7 +58,7 @@ class QuestionsController extends Controller
      */
     public function show(Question $question)
     {
-        //
+        return view('questions.show', compact('question'));
     }
 
     /**
@@ -94,6 +94,9 @@ class QuestionsController extends Controller
      */
     public function destroy(Question $question)
     {
-        //
+        $question->delete();
+
+        return redirect()->route('questions.index')->with('success','Your question has been deleted');
+
     }
 }
