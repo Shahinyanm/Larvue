@@ -50,10 +50,12 @@ class User extends Authenticatable
     {
         $email = $this->email;
         $size = 40;
-       return "https://www.gravatar.com/avatar/" . md5( strtolower( trim( $email ) ) ) . "?s=" . $size;
+        return "https://www.gravatar.com/avatar/" . md5(strtolower(trim($email))) . "?s=" . $size;
     }
 
-    public function getUrlAttribute(){
-        return route('user.show',$this->id);
+    public function getUrlAttribute()
+    {
+//        route('user.show', $this->id);
+        return '';
     }
 }

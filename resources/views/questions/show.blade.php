@@ -7,7 +7,7 @@
                 <div class="card">
                     <div class="card-header">
                         <div class="d-flex align-items-center">
-                            <h1>{{$question->title}}</h1>
+                            <h3>{{$question->title}}</h3>
                             <div class="ml-auto">
                                 <a href="{{route('questions.index')}}" class="btn btn-outline-secondary">Back to all
                                     Questions</a>
@@ -16,7 +16,7 @@
                     </div>
 
                     <div class="card-body">
-                        <h3>{!!  $question->body_html !!}</h3>
+                        <h5>{!!  $question->body_html !!}</h5>
                         <div class="float-right">
                             <span class="text-muted">Answered {{$question->created_date}}</span>
                             <div class="media">
