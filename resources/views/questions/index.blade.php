@@ -9,7 +9,8 @@
                         <div class="d-flex align-items-center">
                             <h2>All Questions</h2>
                             <div class="ml-auto">
-                                <a href="{{route('questions.create')}}" class="btn btn-outline-secondary">Ask question</a>
+                                <a href="{{route('questions.create')}}" class="btn btn-outline-secondary">Ask
+                                    question</a>
                             </div>
                         </div>
                     </div>
@@ -30,17 +31,27 @@
                                     </div>
                                 </div>
                                 <div class="media-body">
-                            <div class="d-flex align-items-center">
-                                <h3 class="mt-0"><a href="{{$question->url}}"> {{$question->title}} </a></h3>
-                                <div class="ml-auto">
-                                    <a href="{{route('questions.edit',$question->id)}}" class="btn btn-sm btn-outline-info">Edit</a>
-                                    <form action="{{route('questions.destroy',$question->id)}}" method="POST" class="form-delete">
-                                        @method('DELETE')
-                                        @csrf
-                                        <button type="submit" class="btn btn-sm btn-outline-danger" onclick="return confirm('Are you sure?')">Delete</button>
-                                    </form>
-                                </div>
-                            </div>
+                                    <div class="d-flex align-items-center">
+                                        <h3 class="mt-0"><a href="{{$question->url}}"> {{$question->title}} </a></h3>
+                                        <div class="ml-auto">
+                                            @if(Auth::user()->can('update-question',$question))
+                                                <a href="{{route('questions.edit',$question->id)}}"
+                                                   class="btn btn-sm btn-outline-info">Edit</a>
+                                            @endif
+                                            @if(Auth::user()->can('delete-question',$question))
+
+                                                <form action="{{route('questions.destroy',$question->id)}}"
+                                                      method="POST"
+                                                      class="form-delete">
+                                                    @method('DELETE')
+                                                    @csrf
+                                                    <button type="submit" class="btn btn-sm btn-outline-danger"
+                                                            onclick="return confirm('Are you sure?')">Delete
+                                                    </button>
+                                                </form>
+                                            @endif
+                                        </div>
+                                    </div>
                                     <p class="lead">
                                         Asked By
                                         <a href="{{$question->user->url}}"> {{$question->user->name}}</a>
