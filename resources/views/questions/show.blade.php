@@ -15,7 +15,7 @@
                         </div>
                     </div>
                     <hr>
-                    <div class="media">
+                    <div class="media m-2">
                         <div class="d-flex flex-column vote-controls mr-4">
                             <a title="This question is useful " class="vote-up text-center">
                                 <i class="fas fa-caret-up"></i>
@@ -24,9 +24,9 @@
                             <a title="This question is not useful" class="vote=down off text-center">
                                 <i class="fas fa-caret-down"></i>
                             </a>
-                            <a title="Click to mark as Favorite(Click again to undo" class="favorites">
+                            <a title="Click to mark as Favorite(Click again to undo" class="favorites text-center">
                                 <i class="fas fa-star"></i>
-                                <span class="favorites-count">123</span>
+                              <sup class="favorites-count">123</sup>
                             </a>
                         </div>
                         <div class="media-body">
