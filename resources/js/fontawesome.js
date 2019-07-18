@@ -40,7 +40,9 @@ import {
     faUniversalAccess,
     faUserCircle,
     faCaretDown,
-    faCaretUp
+    faCaretUp,
+    faStar,
+    faCheck
 
 } from '@fortawesome/free-solid-svg-icons';
 
@@ -48,7 +50,9 @@ library.add(
     faUniversalAccess,
     faUserCircle,
     faCaretDown,
-    faCaretUp
+    faCaretUp,
+    faStar,
+    faCheck
 );
 
 // Icons for Master / Detail management

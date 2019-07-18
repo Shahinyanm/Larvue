@@ -21,12 +21,12 @@
                                 <i class="fas fa-caret-up"></i>
                             </a>
                             <span class="votes-count text-center">1230</span>
-                            <a title="This question is not useful" class="vote=down off text-center">
+                            <a title="This question is not useful" class="vote-down off text-center">
                                 <i class="fas fa-caret-down"></i>
                             </a>
-                            <a title="Click to mark as Favorite(Click again to undo" class="favorites text-center">
+                            <a title="Click to mark as Favorite(Click again to undo" class="favorite mt-2 favorited text-center">
                                 <i class="fas fa-star"></i>
-                              <sup class="favorites-count">123</sup>
+                              <span class="favorites-count">123</span>
                             </a>
                         </div>
                         <div class="media-body">
@@ -58,7 +58,19 @@
                         <hr>
                         @foreach($question->answers as $answer)
                             <div class="media">
+                                <div class="d-flex flex-column vote-controls mr-4">
+                                    <a title="This question is useful " class="vote-up text-center">
+                                        <i class="fas fa-caret-up"></i>
+                                    </a>
+                                    <span class="votes-count text-center">1230</span>
+                                    <a title="This question is not useful" class="vote-down off text-center">
+                                        <i class="fas fa-caret-down"></i>
+                                    </a>
+                                    <a title="Mark this answer as best Answer" class="vote-accepted mt-2 text-center">
+                                        <i class="fas fa-check"></i>
 
+                                    </a>
+                                </div>
                                 <div class="media-body">
                                     {!! $answer->body_html !!}
                                     <div class="float-right">
