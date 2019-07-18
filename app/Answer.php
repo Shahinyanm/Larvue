@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Answer extends Model
 {
-    protected $fillable =['body','user_id'];
+    protected $fillable = ['body', 'user_id'];
 
     public static function boot()
     {
@@ -14,12 +14,17 @@ class Answer extends Model
 
         static::created(function ($answer) {
             $answer->question->increment('answers_count');
-            $answer->question->save();
+//            $answer->question->save();
         });
 
-        static::deleted(function($answer){
-            $answer->question->decrement('answers_count');
-            $answer->question->save();
+        static::deleted(function ($answer) {
+            $question = $answer->question;
+            $question->decrement('answers_count');
+            if ($question->bes_answer_id === $answer->id) {
+                $question->bes_answer_id = NULL;
+                $question->save();
+            }
+//            $answer->question->save();
         });
 
     }
@@ -38,8 +43,15 @@ class Answer extends Model
     {
         return \Parsedown::instance()->text($this->body);
     }
+
     public function getCreatedDateAttribute()
     {
         return \Carbon\Carbon::parse($this->created_at)->diffForHumans();
+    }
+
+    public function getStatusAttribute()
+    {
+
+        return $this->id === $this->question->best_answer_id ? 'vote-accepted' : '';
     }
 }

@@ -17,7 +17,7 @@
                             <a title="This question is not useful" class="vote-down off text-center">
                                 <i class="fas fa-caret-down"></i>
                             </a>
-                            <a title="Mark this answer as best Answer" class="vote-accepted mt-2 text-center">
+                            <a title="Mark this answer as best Answer" class="{{$answer->status}}  mt-2 text-center">
                                 <i class="fas fa-check"></i>
 
                             </a>
