@@ -6,8 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Question extends Model
 {
-    protected $fillable = ['title', 'body'];
     public $timestamps = false;
+    protected $fillable = ['title', 'body'];
 
     public function user()
     {
@@ -32,25 +32,49 @@ class Question extends Model
 
     public function getStatusAttribute()
     {
-        if($this->answers_count > 0){
-            if($this->best_answer_id){
-                return  "answered_accept";
+        if ($this->answers_count > 0) {
+            if ($this->best_answer_id) {
+                return "answered_accept";
             }
             return "answered";
-        }else {
+        } else {
             return "unanswered";
         }
 
     }
-    public function answers(){
+
+    public function answers()
+    {
         return $this->hasMany(Answer::class);
     }
-    public function getBodyHtmlAttribute(){
+
+    public function getBodyHtmlAttribute()
+    {
         return \Parsedown::instance()->text($this->body);
     }
 
-    public function acceptBestAnswer($answer){
+    public function acceptBestAnswer($answer)
+    {
         $this->best_answer_id = $answer->id;
         $this->save();
+    }
+
+    public function favorites()
+    {
+        return $this->belongsToMany(User::class, 'favorites', 'question_id', 'user_id')->withTimestamps();
+    }
+
+    public function isFavorite()
+    {
+        return $this->favorites->where('user_id', auth()->id())->count() > 0;
+    }
+
+    public function getIsFavoritedAttribute()
+    {
+        return $this->isFavorite();
+    }
+
+    public function getFavoritesCountAttribute(){
+        return $this->favorites->count();
     }
 }
