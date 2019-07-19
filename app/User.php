@@ -58,4 +58,6 @@ class User extends Authenticatable
 //        route('user.show', $this->id);
         return '';
     }
+
+
 }
