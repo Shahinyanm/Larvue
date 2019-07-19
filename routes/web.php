@@ -20,3 +20,6 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::resource('questions','QuestionsController');
 Route::resource('questions.answers','AnswersController')->except(['index','show','create']);;
 Route::post('answers/{answer}/accept','AcceptAnswerController')->name('answers.accept');
+
+Route::post('questions/{question}/favorites','FavoritesController@store')->name('questions.favorite');
+Route::delete('questions/{question}/favorites','FavoritesController@destroy')->name('questions.unfavorite');
