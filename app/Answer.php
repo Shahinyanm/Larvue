@@ -57,6 +57,7 @@ class Answer extends Model
 
     public function getIsBestAttribute()
     {
+
         return $this->isBest();
     }
 
