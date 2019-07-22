@@ -17,13 +17,30 @@
                     <hr>
                     <div class="media m-2">
                         <div class="d-flex flex-column vote-controls mr-4">
-                            <a title="This question is useful " class="vote-up text-center">
+                            <a title="This question is useful " class="vote-up {{Auth::guest()? 'off':''}} text-center"
+                                onclick="event.preventDefault(); document.getElementById('vote-up-question-{{$question->id}}').submit();"
+                            >
+
                                 <i class="fas fa-caret-up"></i>
                             </a>
-                            <span class="votes-count text-center">1230</span>
-                            <a title="This question is not useful" class="vote-down off text-center">
+                            <form id="vote-up-question-{{$question->id}}"
+                                  action="/questions/{{$question->id}}/vote" style="display:none"
+                                  method="POST">
+                                @csrf
+                                <input type="hidden" name="vote" value="1">
+                            </form>
+                            <span class="votes-count text-center">{{$question->votes_count}}</span>
+                            <a title="This question is not useful" class="vote-down {{Auth::guest()? 'off':''}} text-center"
+                               onclick="event.preventDefault(); document.getElementById('vote-down-question-{{$question->id}}').submit();"
+                            >
                                 <i class="fas fa-caret-down"></i>
                             </a>
+                            <form id="vote-down-question-{{$question->id}}"
+                                  action="/questions/{{$question->id}}/vote" style="display:none"
+                                  method="POST">
+                                @csrf
+                                <input type="hidden" name="vote" value="-1">
+                            </form>
                             <a title="Click to mark as Favorite(Click again to undo"
                                class="favorite mt-2 {{Auth::guest()? 'off' : ($question->is_favorited ? 'favorited' :'')}} text-center"
                                onclick="event.preventDefault(); document.getElementById('favorite-question-{{$question->id}}').submit();"
