@@ -17,7 +17,7 @@
 
                     <div class="card-body">
                         @include('_partials.message')
-                        @foreach($questions as $question)
+                        @forelse ($questions as $question)
                             <div class="media">
                                 <div class="d-flex flex-column counters">
                                     <div class="vote">
@@ -60,7 +60,11 @@
                                 </div>
                             </div>
                             <hr>
-                        @endforeach
+                            @empty
+                            <div class="alert alert-warning">
+                                <strng>Sorry</strng> There are now Questions available.
+                            </div>
+                        @endforelse
                         <div class="text-center">
                             {{$questions->links() }}
 
