@@ -10990,11 +10990,27 @@ __webpack_require__.r(__webpack_exports__);
       }).catch(function (err) {
         console.log(err.response);
       });
+    },
+    destroy: function destroy() {
+      var _this2 = this;
+
+      if (confirm("Are you sure?")) {
+        axios.delete(this.endpoint).then(function (res) {
+          $(_this2.$el).fadeOut(500, function () {
+            alert(res.data.message);
+          });
+        }).catch(function (err) {
+          console.log(err.response);
+        });
+      }
     }
   },
   computed: {
     isInvalid: function isInvalid() {
       return this.body.length < 10;
+    },
+    endpoint: function endpoint() {
+      return "".concat(this.questionId, "/answers/").concat(this.id);
     }
   }
 });
