@@ -22,6 +22,11 @@ class Question extends Model
         $this->attributes['slug'] = str_slug($value);
     }
 
+//    public function setBodyAttribute($value)
+//    {
+//        $this->attributes['body'] = clean($value);
+//    }
+
     public function getUrlAttribute()
     {
         return route('questions.show', $this->id);
@@ -52,7 +57,7 @@ class Question extends Model
 
     public function getBodyHtmlAttribute()
     {
-        return \Parsedown::instance()->text($this->body);
+        return clean($this->bodyHtml());
     }
 
     public function acceptBestAnswer($answer)
@@ -68,13 +73,11 @@ class Question extends Model
 
     public function isFavorite()
     {
-
         return $this->favorites()->where('user_id', auth()->id())->count() > 0;
     }
 
     public function getIsFavoritedAttribute()
     {
-
         return $this->isFavorite();
     }
 
@@ -84,5 +87,15 @@ class Question extends Model
     }
 
 
+    public function getExcerptAttribute(){
+       return $this->excerpt(250);
+    }
 
+    private function bodyHtml(){
+        return \Parsedown::instance()->text($this->body);
+    }
+
+    public function excerpt($length){
+        return str_limit(strip_tags($this->bodyHtml()),$length);
+    }
 }
