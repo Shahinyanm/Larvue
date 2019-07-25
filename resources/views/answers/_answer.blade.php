@@ -1,6 +1,7 @@
 <div class="media post">
     @include('shared._vote_control',[
     'model'=>$answer])
+
     <div class="media-body">
         {!! $answer->body_html !!}
         <div class="row">
@@ -25,9 +26,7 @@
             <div class="col-4"></div>
 
             <div class="col-4">
-                @include('shared._author',[
-                'model'=>$answer,
-                'label'=>'answered'])
+                <user-info :model="{{$answer}}" label="Answered"></user-info>
             </div>
         </div>
     </div>

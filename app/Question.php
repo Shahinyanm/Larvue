@@ -10,6 +10,7 @@ class Question extends Model
 
     public $timestamps = false;
     protected $fillable = ['title', 'body'];
+    protected $appends = ['created_date'];
 
     public function user()
     {
@@ -52,7 +53,7 @@ class Question extends Model
 
     public function answers()
     {
-        return $this->hasMany(Answer::class)->orderBy('votes_count','DESC');
+        return $this->hasMany(Answer::class)->orderBy('votes_count','DESC')->with('user');
     }
 
     public function getBodyHtmlAttribute()
