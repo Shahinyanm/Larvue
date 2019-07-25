@@ -62,7 +62,7 @@
                             <hr>
                             @empty
                             <div class="alert alert-warning">
-                                <strng>Sorry</strng> There are now Questions available.
+                                <strong>Sorry</strong> There are now Questions available.
                             </div>
                         @endforelse
                         <div class="text-center">
