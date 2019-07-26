@@ -17,33 +17,7 @@
                     <hr>
                     <div class="media m-2">
 
-                        <div class="d-flex flex-column vote-controls mr-4">
-                            <a title="This question is useful " class="vote-up {{Auth::guest()? 'off':''}} text-center"
-                                onclick="event.preventDefault(); document.getElementById('vote-up-question-{{$question->id}}').submit();"
-                            >
-
-                                <i class="fas fa-caret-up"></i>
-                            </a>
-                            <form id="vote-up-question-{{$question->id}}"
-                                  action="/questions/{{$question->id}}/vote" style="display:none"
-                                  method="POST">
-                                @csrf
-                                <input type="hidden" name="vote" value="1">
-                            </form>
-                            <span class="votes-count text-center">{{$question->votes_count}}</span>
-                            <a title="This question is not useful" class="vote-down {{Auth::guest()? 'off':''}} text-center"
-                               onclick="event.preventDefault(); document.getElementById('vote-down-question-{{$question->id}}').submit();"
-                            >
-                                <i class="fas fa-caret-down"></i>
-                            </a>
-                            <form id="vote-down-question-{{$question->id}}"
-                                  action="/questions/{{$question->id}}/vote" style="display:none"
-                                  method="POST">
-                                @csrf
-                                <input type="hidden" name="vote" value="-1">
-                            </form>
-                        <favorite :question="{{$question}}"></favorite>
-                        </div>
+                       <vote :model="{{$question}}" :name="'question'"></vote>
                         <div class="media-body">
                             <h5>{!!  $question->body_html !!}</h5>
                             <div class="row">
