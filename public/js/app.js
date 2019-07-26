@@ -11070,12 +11070,47 @@ __webpack_require__.r(__webpack_exports__);
     return {
       isFavorited: this.question.is_favorited,
       count: this.question.favorites_count,
-      signedIn: true
+      id: this.question.id
     };
   },
   computed: {
     classes: function classes() {
-      return ['favorite', 'mt-2', 'text-center', !this.signedIn ? 'off' : this.isFavorited ? favorited : ''];
+      return ['favorite', 'mt-2', 'text-center', !this.signedIn ? 'off' : this.isFavorited ? 'favorited' : ''];
+    },
+    endpoint: function endpoint() {
+      return "/questions/".concat(this.id, "/favorites");
+    },
+    signedIn: function signedIn() {
+      return window.Auth.signedIn;
+    }
+  },
+  methods: {
+    toggle: function toggle() {
+      if (!this.signedIn) {
+        this.$toast.warning('Please Login to favorite this question', 'Warning', {
+          timeout: 3000,
+          position: 'bottomLeft'
+        });
+        return;
+      }
+
+      this.isFavorited ? this.destroy() : this.create();
+    },
+    destroy: function destroy() {
+      var _this = this;
+
+      axios.delete(this.endpoint).then(function (res) {
+        _this.count--;
+        _this.isFavorited = false;
+      });
+    },
+    create: function create() {
+      var _this2 = this;
+
+      axios.post(this.endpoint).then(function (res) {
+        _this2.count++;
+        _this2.isFavorited = true;
+      });
     }
   }
 });
@@ -48553,7 +48588,13 @@ var render = function() {
     "a",
     {
       class: _vm.classes,
-      attrs: { title: "Click to mark as Favorite(Click again to undo" }
+      attrs: { title: "Click to mark as Favorite(Click again to undo" },
+      on: {
+        click: function($event) {
+          $event.preventDefault()
+          return _vm.toggle($event)
+        }
+      }
     },
     [
       _c("i", { staticClass: "fas fa-star" }),
