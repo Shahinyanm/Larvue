@@ -17,6 +17,7 @@
 
                     <div class="card-body">
                         @include('_partials.message')
+
                         @forelse ($questions as $question)
                         @include('questions._excerpt')
                         @empty
@@ -24,9 +25,7 @@
                                 <strong>Sorry</strong> There are now Questions available.
                             </div>
                         @endforelse
-
                             {{$questions->links() }}
-
                     </div>
                 </div>
             </div>
