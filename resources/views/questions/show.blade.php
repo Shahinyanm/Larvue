@@ -16,6 +16,7 @@
                     </div>
                     <hr>
                     <div class="media m-2">
+
                         <div class="d-flex flex-column vote-controls mr-4">
                             <a title="This question is useful " class="vote-up {{Auth::guest()? 'off':''}} text-center"
                                 onclick="event.preventDefault(); document.getElementById('vote-up-question-{{$question->id}}').submit();"

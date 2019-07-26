@@ -23,29 +23,5 @@
         @csrf
         <input type="hidden" name="vote" value="-1">
     </form>
-
-@can('accept',$model)
-        <a title="Mark this answer as best Answer"
-           class="{{$model->status}}  mt-2 text-center"
-           onclick="event.preventDefault(); document.getElementById('accept-answer-{{$model->id}}').submit()">
-            <i class="fas fa-check"></i>
-        </a>
-        <form id="accept-answer-{{$model->id}}"
-              action="{{route('answers.accept',$model->id)}}" style="display:none"
-              method="POST">
-            @csrf
-        </form>
-
-        {{--        @if($model instanceof App\Question)--}}
-{{--        @endif--}}
-    @else
-        @if($model->is_best)
-            <a title="The question owner accepted this answer as the best."
-               class="{{$model->status}}  mt-2 text-center"
-               onclick="event.preventDefault(); document.getElementById('accept-answer-{{$model->id}}').submit()">
-                <i class="fas fa-check"></i>
-            </a>
-        @endif
-    @endcan
-
+ <accept :answer="{{$model}}"></accept>
 </div>
