@@ -1,5 +1,6 @@
 <script>
     export default {
+        name:'Answer',
         props: ['answer'],
         data() {
             return {

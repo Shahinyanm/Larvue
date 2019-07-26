@@ -26,7 +26,6 @@
                         @endforelse
 
                             {{$questions->links() }}
-
                     </div>
                 </div>
             </div>
